@@ -44,7 +44,7 @@ var EPISODES = {
   2: [
     { ep: 1, title: "In My Time of Dying", aired: "September 28, 2006", director: "Kim Manners", facts: [
       "Jeffrey Dean Morgan's performance as John Winchester making the deal was filmed in a single take.",
-      "The reaper Tessa would return multiple times throughout the series, becoming a recurring character.",
+      "The reaper Tessa made a strong impression on fans in her debut appearance.",
       "This episode was the highest-rated season premiere of the entire series run."
     ]},
     { ep: 6, title: "No Exit", aired: "November 2, 2006", director: "Kim Manners", facts: [
@@ -53,7 +53,7 @@ var EPISODES = {
       "Holmes' 'Murder Castle' in the episode is based on a real building he constructed in Chicago in the 1890s."
     ]},
     { ep: 15, title: "Tall Tales", aired: "February 15, 2007", director: "Bradford May", facts: [
-      "This episode introduces the Trickster, later revealed to be the archangel Gabriel.",
+      "This episode introduces the Trickster, a mischievous and powerful being who loves toying with people.",
       "The unreliable narrator format — with Sam and Dean telling conflicting versions — was inspired by the Rashomon storytelling technique.",
       "Richard Speight Jr., who plays the Trickster, became one of the most beloved recurring actors in the franchise."
     ]},
@@ -68,7 +68,7 @@ var EPISODES = {
       "Jensen Ackles has cited this as one of his personal favorite episodes to film."
     ]},
     { ep: 22, title: "All Hell Breaks Loose: Part 2", aired: "May 17, 2007", director: "Kim Manners", facts: [
-      "Dean's crossroads deal to bring Sam back — one year to live — sets up the entire Season 3 arc.",
+      "Dean's crossroads deal to bring Sam back — with just one year to live — is one of the most emotionally charged moments in the series.",
       "The opening of the Devil's Gate in Wyoming was the most VFX-heavy sequence the show had produced at that point.",
       "Bobby's line 'Family don\\'t end with blood' became one of the most quoted lines in the entire series."
     ]}
@@ -82,13 +82,13 @@ var EPISODES = {
     { ep: 8, title: "A Very Supernatural Christmas", aired: "December 13, 2007", director: "J. Miller Tobin", facts: [
       "The pagan gods in this episode are disguised as a cheerful suburban couple, played for dark comedy.",
       "The flashback scenes showing young Sam and Dean at Christmas established much of their childhood backstory.",
-      "The amulet Sam gives young Dean in the flashback becomes a significant recurring prop throughout the series."
+      "The amulet Sam gives young Dean in the flashback became a fan-favorite prop from the moment it appeared."
     ]},
     { ep: 11, title: "Mystery Spot", aired: "February 14, 2008", director: "Kim Manners", facts: [
       "The Groundhog Day-style time loop made this one of the most beloved episodes in the entire series.",
       "Asia's 'Heat of the Moment' became permanently associated with the show thanks to this episode.",
       "Jared Padalecki had to perform over 100 variations of waking up for the looping scenes.",
-      "The Trickster's motivations — trying to teach Sam to accept Dean's death — foreshadow his true identity as Gabriel."
+      "The Trickster's motivations — trying to teach Sam to accept Dean's death — add surprising emotional depth to a comedic character."
     ]},
     { ep: 16, title: "No Rest for the Wicked", aired: "May 15, 2008", director: "Kim Manners", facts: [
       "Dean being dragged to Hell by hellhounds became one of the most iconic images in the show's history.",
@@ -110,7 +110,7 @@ var EPISODES = {
     ]},
     { ep: 10, title: "Heaven and Hell", aired: "November 20, 2008", director: "J. Miller Tobin", facts: [
       "This episode reveals Dean's memories of torturing souls in Hell — Jensen Ackles has said this was the hardest scene he ever filmed.",
-      "Anna Milton's storyline about a fallen angel predates Castiel's own fall from grace by several seasons.",
+      "Anna Milton's storyline about a fallen angel added new layers to the show's expanding angel mythology.",
       "The episode required the largest number of extras for the angel battle sequences up to that point."
     ]},
     { ep: 17, title: "It's a Terrible Life", aired: "March 26, 2009", director: "James L. Conway", facts: [
@@ -121,7 +121,7 @@ var EPISODES = {
     { ep: 18, title: "The Monster at the End of This Book", aired: "April 2, 2009", director: "Mike Rohl", facts: [
       "This episode introduces Chuck Shurley and the 'Supernatural' book series, breaking the fourth wall for the first time.",
       "The title is taken from a beloved Sesame Street children's book featuring Grover.",
-      "Chuck was originally just a prophet, but the writers later decided to reveal him as God — a twist planned years in advance.",
+      "Chuck Shurley as the 'prophet' author of the Supernatural books instantly became one of the show's most intriguing recurring characters.",
       "The in-universe fandom of the books mirrors the real Supernatural fandom, complete with 'Samlicker81' fan fiction."
     ]},
     { ep: 22, title: "Lucifer Rising", aired: "May 14, 2009", director: "Eric Kripke", facts: [
@@ -232,7 +232,7 @@ var EPISODES = {
     ]},
     { ep: 11, title: "First Born", aired: "January 21, 2014", director: "John Badham", facts: [
       "Timothy Omundson's portrayal of Cain became an instant fan favorite despite only appearing in a handful of episodes.",
-      "The Mark of Cain mythology was created specifically for this episode and drove the next two seasons of plot.",
+      "The Mark of Cain mythology was created specifically for this episode and instantly became a fan-favorite storyline.",
       "The fight choreography between Dean and the demons was praised as some of the best in the series."
     ]},
     { ep: 18, title: "Meta Fiction", aired: "April 15, 2014", director: "Thomas J. Wright", facts: [
@@ -256,7 +256,7 @@ var EPISODES = {
       "This was the 200th episode of Supernatural and served as a love letter to the fanbase.",
       "The all-girls school musical of 'Supernatural' featured original songs written specifically for the episode.",
       "The 'single man tear' joke is a direct reference to fan fiction tropes about Dean.",
-      "Chuck's brief appearance at the end hinted at his true identity years before the reveal."
+      "Chuck's brief surprise appearance at the end delighted fans who had been wondering about his whereabouts."
     ]},
     { ep: 23, title: "Brother's Keeper", aired: "May 20, 2015", director: "Philip Sgriccia", facts: [
       "The removal of the Mark of Cain unleashing the Darkness was planned as a two-season arc from the beginning.",
@@ -275,7 +275,7 @@ var EPISODES = {
     { ep: 8, title: "Just My Imagination", aired: "December 2, 2015", director: "Richard Speight Jr.", facts: [
       "Sully the imaginary friend was created to explore Sam's childhood loneliness.",
       "Nate Torrence (Sully) wore a full Zanna costume with prosthetic makeup that took 3 hours to apply.",
-      "Richard Speight Jr. (the Trickster/Gabriel) directed this episode, his first of many for the series."
+      "Richard Speight Jr. (the Trickster) directed this episode, his first of many for the series."
     ]},
     { ep: 20, title: "Don't Call Me Shurley", aired: "May 4, 2016", director: "Robert Singer", facts: [
       "This episode officially confirms that Chuck Shurley is God.",
@@ -298,7 +298,7 @@ var EPISODES = {
     { ep: 9, title: "First Blood", aired: "January 26, 2017", director: "Robert Singer", facts: [
       "Sam and Dean being held in a secret government black site was filmed in an actual decommissioned government building.",
       "The episode plays like a thriller rather than a supernatural show for most of its runtime.",
-      "The deal with Billie the Reaper had lasting consequences that extended into later seasons."
+      "The deal with Billie the Reaper adds high stakes and tension to the brothers' escape."
     ]},
     { ep: 12, title: "Stuck in the Middle (With You)", aired: "February 16, 2017", director: "Richard Speight Jr.", facts: [
       "The entire episode is structured as a Quentin Tarantino homage, complete with non-linear storytelling.",
@@ -309,7 +309,7 @@ var EPISODES = {
   13: [
     { ep: 1, title: "Lost and Found", aired: "October 12, 2017", director: "Philip Sgriccia", facts: [
       "Alexander Calvert's portrayal of newborn-but-adult Jack Kline won over fans immediately.",
-      "Castiel's death at the end of Season 12 was kept ambiguous to build suspense about his return.",
+      "The Season 13 premiere had to establish Jack's character quickly while balancing an emotional aftermath.",
       "The opening scene of Jack's birth utilized more practical effects than any other birth scene in the series."
     ]},
     { ep: 16, title: "Scoobynatural", aired: "March 29, 2018", director: "Robert Singer", facts: [
