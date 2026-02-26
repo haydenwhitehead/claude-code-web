@@ -91,16 +91,55 @@
     }, { passive: true });
   }
 
-  // --- Smooth Scroll for Nav Links ---
+  // --- Mobile Hamburger Menu ---
+  var navToggle = document.getElementById('navToggle');
+  var navMenu = document.getElementById('navMenu');
+
+  if (navToggle && navMenu) {
+    navToggle.addEventListener('click', function () {
+      navToggle.classList.toggle('active');
+      navMenu.classList.toggle('open');
+    });
+  }
+
+  // --- Smooth Scroll for Nav Links (closes menu on mobile) ---
   document.querySelectorAll('#main-nav a[href^="#"]').forEach(function (link) {
     link.addEventListener('click', function (e) {
       var target = document.querySelector(this.getAttribute('href'));
       if (target) {
         e.preventDefault();
         target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        if (navToggle && navMenu) {
+          navToggle.classList.remove('active');
+          navMenu.classList.remove('open');
+        }
       }
     });
   });
+
+  // --- Touch Swipe for Quotes Carousel ---
+  var carousel = document.getElementById('quotesCarousel');
+  if (carousel) {
+    var touchStartX = 0;
+    var touchEndX = 0;
+
+    carousel.addEventListener('touchstart', function (e) {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    carousel.addEventListener('touchend', function (e) {
+      touchEndX = e.changedTouches[0].screenX;
+      var diff = touchStartX - touchEndX;
+      if (Math.abs(diff) > 50) {
+        if (diff > 0) {
+          nextQuote();
+        } else {
+          prevQuote();
+        }
+        resetAutoplay();
+      }
+    }, { passive: true });
+  }
 
   // --- Easter Egg: Konami-ish sequence (↑ ↑ ↓ ↓) ---
   var easterSequence = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown'];
