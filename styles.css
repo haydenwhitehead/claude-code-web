@@ -86,10 +86,11 @@ body {
 
 .hero h1 {
   font-family: 'Cinzel', serif;
-  font-size: clamp(3rem, 8vw, 7rem);
+  font-size: clamp(2rem, 8vw, 7rem);
   font-weight: 900;
   text-transform: uppercase;
   letter-spacing: 0.15em;
+  word-break: break-word;
   color: var(--cream);
   text-shadow:
     0 0 10px rgba(212, 160, 23, 0.3),
@@ -716,6 +717,10 @@ footer {
 
 /* --- Responsive: Small phones (480px) --- */
 @media (max-width: 480px) {
+  .hero h1 {
+    letter-spacing: 0.05em;
+  }
+
   .hero-content {
     padding: 1rem;
   }
