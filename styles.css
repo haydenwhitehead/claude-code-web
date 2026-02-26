@@ -1,0 +1,623 @@
+/* ===========================
+   Supernatural Fan Page Styles
+   =========================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap');
+
+/* --- Reset & Base --- */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --black: #0a0a0a;
+  --charcoal: #1a1a1a;
+  --dark-gray: #222;
+  --gray: #888;
+  --light-gray: #ccc;
+  --cream: #f0e6d3;
+  --gold: #d4a017;
+  --blood: #8b0000;
+  --hellfire: #c0392b;
+  --holy: #f4e4ba;
+  --blue-angel: #4a90d9;
+  --green-dark: #1a2e1a;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Crimson Text', Georgia, serif;
+  background: var(--black);
+  color: var(--cream);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* --- Hero --- */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background:
+    radial-gradient(ellipse at center bottom, rgba(139, 0, 0, 0.3) 0%, transparent 60%),
+    radial-gradient(ellipse at center, rgba(0,0,0,0.6) 0%, var(--black) 100%),
+    linear-gradient(180deg, #0d0d0d 0%, #1a0a0a 50%, #0a0a0a 100%);
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"><circle cx="100" cy="100" r="80" fill="none" stroke="rgba(212,160,23,0.06)" stroke-width="1"/><polygon points="100,20 120,70 175,70 130,100 145,155 100,125 55,155 70,100 25,70 80,70" fill="none" stroke="rgba(212,160,23,0.04)" stroke-width="0.5"/></svg>') center/200px repeat;
+  opacity: 0.5;
+  animation: subtlePulse 8s ease-in-out infinite;
+}
+
+@keyframes subtlePulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.6; }
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  padding: 2rem;
+}
+
+.pentagram {
+  font-size: 4rem;
+  color: var(--gold);
+  margin-bottom: 1rem;
+  text-shadow: 0 0 30px rgba(212, 160, 23, 0.5);
+  animation: glowPulse 3s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+  0%, 100% { text-shadow: 0 0 20px rgba(212, 160, 23, 0.3); }
+  50% { text-shadow: 0 0 40px rgba(212, 160, 23, 0.7), 0 0 80px rgba(212, 160, 23, 0.3); }
+}
+
+.hero h1 {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(3rem, 8vw, 7rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--cream);
+  text-shadow:
+    0 0 10px rgba(212, 160, 23, 0.3),
+    0 2px 4px rgba(0,0,0,0.8);
+  margin-bottom: 0.5rem;
+}
+
+.tagline {
+  font-size: clamp(1rem, 2.5vw, 1.5rem);
+  font-style: italic;
+  color: var(--gold);
+  letter-spacing: 0.05em;
+  margin-bottom: 2rem;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.9rem 2.5rem;
+  font-family: 'Cinzel', serif;
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--cream);
+  border: 2px solid var(--gold);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+  z-index: -1;
+}
+
+.btn:hover {
+  color: var(--black);
+}
+
+.btn:hover::before {
+  transform: scaleX(1);
+}
+
+/* --- Navigation --- */
+#main-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(10, 10, 10, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(212, 160, 23, 0.2);
+}
+
+.nav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0.8rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-logo {
+  font-family: 'Cinzel', serif;
+  font-weight: 900;
+  font-size: 1.5rem;
+  color: var(--gold);
+  letter-spacing: 0.1em;
+}
+
+#main-nav ul {
+  display: flex;
+  list-style: none;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+#main-nav a {
+  font-family: 'Cinzel', serif;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--light-gray);
+  text-decoration: none;
+  transition: color 0.3s;
+  position: relative;
+}
+
+#main-nav a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--gold);
+  transition: width 0.3s;
+}
+
+#main-nav a:hover {
+  color: var(--gold);
+}
+
+#main-nav a:hover::after {
+  width: 100%;
+}
+
+/* --- Sections --- */
+.section {
+  padding: 5rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-dark {
+  max-width: 100%;
+  background: var(--charcoal);
+  padding: 5rem 2rem;
+}
+
+.section-dark > * {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.section-title {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 700;
+  text-align: center;
+  color: var(--gold);
+  margin-bottom: 3rem;
+  position: relative;
+}
+
+.section-title::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 2px;
+  background: var(--gold);
+  margin: 0.8rem auto 0;
+}
+
+.section-subtitle {
+  text-align: center;
+  color: var(--gray);
+  font-style: italic;
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+}
+
+/* --- Character Cards --- */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 2rem;
+}
+
+.card {
+  background: linear-gradient(145deg, rgba(26,26,26,0.9), rgba(15,15,15,0.95));
+  border: 1px solid rgba(212, 160, 23, 0.15);
+  border-radius: 4px;
+  padding: 2rem;
+  transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(212, 160, 23, 0.5);
+  box-shadow: 0 8px 30px rgba(212, 160, 23, 0.1);
+}
+
+.card-icon {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.card h3 {
+  font-family: 'Cinzel', serif;
+  font-size: 1.4rem;
+  color: var(--cream);
+  margin-bottom: 0.25rem;
+}
+
+.card-role {
+  color: var(--gold);
+  font-style: italic;
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+}
+
+.card p {
+  color: var(--light-gray);
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+.card-traits {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.card-traits li {
+  font-size: 0.8rem;
+  font-family: 'Cinzel', serif;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.3rem 0.8rem;
+  border: 1px solid rgba(212, 160, 23, 0.3);
+  color: var(--gold);
+  border-radius: 2px;
+}
+
+/* --- Timeline --- */
+.timeline {
+  position: relative;
+  padding-left: 3rem;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 1rem;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--gold), var(--blood), var(--gold));
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 2rem;
+  padding-left: 1.5rem;
+}
+
+.timeline-marker {
+  position: absolute;
+  left: -2.55rem;
+  top: 0.25rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  background: var(--charcoal);
+  border: 2px solid var(--gold);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Cinzel', serif;
+  font-weight: 700;
+  font-size: 0.75rem;
+  color: var(--gold);
+}
+
+.timeline-body h4 {
+  font-family: 'Cinzel', serif;
+  font-size: 1.1rem;
+  color: var(--cream);
+  margin-bottom: 0.3rem;
+}
+
+.timeline-body p {
+  color: var(--light-gray);
+  font-size: 0.95rem;
+}
+
+/* --- Lore Grid --- */
+.lore-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.lore-item {
+  padding: 1.5rem;
+  background: rgba(26, 26, 26, 0.6);
+  border-left: 3px solid var(--gold);
+  transition: background 0.3s;
+}
+
+.lore-item:hover {
+  background: rgba(212, 160, 23, 0.05);
+}
+
+.lore-item h4 {
+  font-family: 'Cinzel', serif;
+  font-size: 1.1rem;
+  color: var(--cream);
+  margin-bottom: 0.5rem;
+}
+
+.lore-item p {
+  color: var(--light-gray);
+  font-size: 0.95rem;
+}
+
+/* --- Quotes Carousel --- */
+.quotes-carousel {
+  position: relative;
+  min-height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.quote {
+  position: absolute;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  max-width: 700px;
+  padding: 0 1rem;
+}
+
+.quote.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.quote p {
+  font-size: clamp(1.2rem, 3vw, 1.8rem);
+  font-style: italic;
+  color: var(--cream);
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+
+.quote cite {
+  font-style: normal;
+  font-family: 'Cinzel', serif;
+  font-size: 0.9rem;
+  color: var(--gold);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.carousel-controls {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.carousel-controls button {
+  width: 50px;
+  height: 50px;
+  background: transparent;
+  border: 2px solid rgba(212, 160, 23, 0.4);
+  color: var(--gold);
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.carousel-controls button:hover {
+  background: rgba(212, 160, 23, 0.15);
+  border-color: var(--gold);
+}
+
+/* --- Gallery --- */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+.gallery-item {
+  background: var(--charcoal);
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid rgba(212, 160, 23, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.gallery-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+}
+
+.gallery-placeholder {
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 4rem;
+  background: linear-gradient(135deg, rgba(26,26,26,0.8), rgba(42,42,42,0.5));
+  border-bottom: 2px solid var(--accent, var(--gold));
+}
+
+.gallery-item p {
+  padding: 1.2rem;
+  color: var(--light-gray);
+  font-size: 0.95rem;
+}
+
+/* --- Playlist --- */
+.playlist {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.playlist-item {
+  display: flex;
+  align-items: center;
+  padding: 1rem 1.2rem;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  transition: background 0.3s;
+  gap: 1.5rem;
+}
+
+.playlist-item:hover {
+  background: rgba(212, 160, 23, 0.05);
+}
+
+.track-num {
+  font-family: 'Cinzel', serif;
+  font-size: 0.85rem;
+  color: var(--gold);
+  min-width: 2rem;
+}
+
+.track-name {
+  flex: 1;
+  font-size: 1.05rem;
+  color: var(--cream);
+}
+
+.track-artist {
+  color: var(--gray);
+  font-style: italic;
+  font-size: 0.9rem;
+}
+
+/* --- Footer --- */
+footer {
+  text-align: center;
+  padding: 4rem 2rem;
+  border-top: 1px solid rgba(212, 160, 23, 0.15);
+  background: linear-gradient(to bottom, var(--black), #050505);
+}
+
+.footer-pentagram {
+  font-size: 2rem;
+  color: var(--gold);
+  opacity: 0.5;
+  margin-bottom: 1rem;
+}
+
+.footer-quote {
+  font-style: italic;
+  font-size: 1.1rem;
+  color: var(--cream);
+  margin-bottom: 1.5rem;
+  opacity: 0.8;
+}
+
+.footer-credits {
+  color: var(--gray);
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.footer-disclaimer {
+  color: var(--gray);
+  font-size: 0.75rem;
+  opacity: 0.6;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* --- Scroll Animations --- */
+.fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+  #main-nav ul {
+    gap: 1rem;
+  }
+
+  .nav-inner {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .card-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .timeline {
+    padding-left: 2.5rem;
+  }
+
+  .timeline-marker {
+    left: -2.1rem;
+    width: 2rem;
+    height: 2rem;
+    font-size: 0.65rem;
+  }
+
+  .playlist-item {
+    gap: 1rem;
+  }
+
+  .track-artist {
+    display: none;
+  }
+}
