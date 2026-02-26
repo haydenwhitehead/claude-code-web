@@ -1,179 +1,148 @@
 // ===========================
-// Supernatural Fan Page Scripts
+// Supernatural Episode Lookup
 // ===========================
 
 (function () {
   'use strict';
 
-  // --- Quotes Carousel ---
-  const quotes = document.querySelectorAll('.quote');
-  const prevBtn = document.getElementById('prevQuote');
-  const nextBtn = document.getElementById('nextQuote');
-  let currentQuote = 0;
-  let autoplayTimer;
+  var seasonSelect = document.getElementById('seasonSelect');
+  var episodeSelect = document.getElementById('episodeSelect');
+  var resultsDiv = document.getElementById('results');
+  var placeholder = document.getElementById('placeholder');
+  var resultBadge = document.getElementById('resultBadge');
+  var resultTitle = document.getElementById('resultTitle');
+  var resultMeta = document.getElementById('resultMeta');
+  var resultFacts = document.getElementById('resultFacts');
+  var randomBtn = document.getElementById('randomBtn');
 
-  function showQuote(index) {
-    quotes.forEach(function (q) {
-      q.classList.remove('active');
-    });
-    currentQuote = (index + quotes.length) % quotes.length;
-    quotes[currentQuote].classList.add('active');
+  // Populate season dropdown
+  for (var s = 1; s <= 15; s++) {
+    var opt = document.createElement('option');
+    opt.value = s;
+    opt.textContent = 'Season ' + s;
+    seasonSelect.appendChild(opt);
   }
 
-  function nextQuote() {
-    showQuote(currentQuote + 1);
-  }
+  // When a season is selected, populate episodes
+  seasonSelect.addEventListener('change', function () {
+    var season = parseInt(this.value);
+    episodeSelect.innerHTML = '<option value="">Choose an episode</option>';
 
-  function prevQuote() {
-    showQuote(currentQuote - 1);
-  }
-
-  function startAutoplay() {
-    autoplayTimer = setInterval(nextQuote, 5000);
-  }
-
-  function resetAutoplay() {
-    clearInterval(autoplayTimer);
-    startAutoplay();
-  }
-
-  if (quotes.length > 0) {
-    if (nextBtn) {
-      nextBtn.addEventListener('click', function () {
-        nextQuote();
-        resetAutoplay();
-      });
+    if (!season) {
+      episodeSelect.disabled = true;
+      showPlaceholder();
+      return;
     }
 
-    if (prevBtn) {
-      prevBtn.addEventListener('click', function () {
-        prevQuote();
-        resetAutoplay();
-      });
-    }
+    var count = SEASON_EPISODE_COUNTS[season] || 22;
+    var episodesInSeason = EPISODES[season] || [];
 
-    startAutoplay();
-  }
-
-  // --- Scroll-triggered Fade-in Animations ---
-  var animatedElements = document.querySelectorAll(
-    '.card, .timeline-item, .lore-item, .gallery-item, .playlist-item'
-  );
-
-  animatedElements.forEach(function (el) {
-    el.classList.add('fade-in');
-  });
-
-  function checkVisibility() {
-    var triggerBottom = window.innerHeight * 0.88;
-
-    animatedElements.forEach(function (el) {
-      var box = el.getBoundingClientRect();
-      if (box.top < triggerBottom) {
-        el.classList.add('visible');
-      }
-    });
-  }
-
-  window.addEventListener('scroll', checkVisibility, { passive: true });
-  window.addEventListener('load', checkVisibility);
-
-  // --- Sticky Nav Shadow ---
-  var nav = document.getElementById('main-nav');
-
-  if (nav) {
-    window.addEventListener('scroll', function () {
-      if (window.scrollY > 50) {
-        nav.style.boxShadow = '0 2px 20px rgba(0,0,0,0.5)';
+    for (var e = 1; e <= count; e++) {
+      var opt = document.createElement('option');
+      opt.value = e;
+      var epData = findEpisode(season, e);
+      if (epData) {
+        opt.textContent = 'Episode ' + e + ' — ' + epData.title;
       } else {
-        nav.style.boxShadow = 'none';
+        opt.textContent = 'Episode ' + e;
       }
-    }, { passive: true });
-  }
+      episodeSelect.appendChild(opt);
+    }
 
-  // --- Mobile Hamburger Menu ---
-  var navToggle = document.getElementById('navToggle');
-  var navMenu = document.getElementById('navMenu');
-
-  if (navToggle && navMenu) {
-    navToggle.addEventListener('click', function () {
-      navToggle.classList.toggle('active');
-      navMenu.classList.toggle('open');
-    });
-  }
-
-  // --- Smooth Scroll for Nav Links (closes menu on mobile) ---
-  document.querySelectorAll('#main-nav a[href^="#"]').forEach(function (link) {
-    link.addEventListener('click', function (e) {
-      var target = document.querySelector(this.getAttribute('href'));
-      if (target) {
-        e.preventDefault();
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        if (navToggle && navMenu) {
-          navToggle.classList.remove('active');
-          navMenu.classList.remove('open');
-        }
-      }
-    });
+    episodeSelect.disabled = false;
+    showPlaceholder();
   });
 
-  // --- Touch Swipe for Quotes Carousel ---
-  var carousel = document.getElementById('quotesCarousel');
-  if (carousel) {
-    var touchStartX = 0;
-    var touchEndX = 0;
+  // When an episode is selected, show results
+  episodeSelect.addEventListener('change', function () {
+    var season = parseInt(seasonSelect.value);
+    var ep = parseInt(this.value);
 
-    carousel.addEventListener('touchstart', function (e) {
-      touchStartX = e.changedTouches[0].screenX;
-    }, { passive: true });
+    if (!season || !ep) {
+      showPlaceholder();
+      return;
+    }
 
-    carousel.addEventListener('touchend', function (e) {
-      touchEndX = e.changedTouches[0].screenX;
-      var diff = touchStartX - touchEndX;
-      if (Math.abs(diff) > 50) {
-        if (diff > 0) {
-          nextQuote();
-        } else {
-          prevQuote();
-        }
-        resetAutoplay();
-      }
-    }, { passive: true });
-  }
-
-  // --- Easter Egg: Konami-ish sequence (↑ ↑ ↓ ↓) ---
-  var easterSequence = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown'];
-  var easterProgress = 0;
-
-  document.addEventListener('keydown', function (e) {
-    if (e.key === easterSequence[easterProgress]) {
-      easterProgress++;
-      if (easterProgress === easterSequence.length) {
-        easterProgress = 0;
-        showEasterEgg();
-      }
+    var data = findEpisode(season, ep);
+    if (data) {
+      showResult(season, ep, data);
     } else {
-      easterProgress = 0;
+      showNoData(season, ep);
     }
   });
 
-  function showEasterEgg() {
-    var overlay = document.createElement('div');
-    overlay.style.cssText =
-      'position:fixed;inset:0;background:rgba(0,0,0,0.9);z-index:9999;' +
-      'display:flex;align-items:center;justify-content:center;flex-direction:column;' +
-      'cursor:pointer;animation:fadeIn 0.5s ease';
+  // Random episode button
+  randomBtn.addEventListener('click', function () {
+    var seasons = Object.keys(EPISODES);
+    var randSeason = seasons[Math.floor(Math.random() * seasons.length)];
+    var eps = EPISODES[randSeason];
+    var randEp = eps[Math.floor(Math.random() * eps.length)];
 
-    overlay.innerHTML =
-      '<p style="font-family:Cinzel,serif;font-size:2rem;color:#d4a017;margin-bottom:1rem;">&#9737;</p>' +
-      '<p style="font-family:Cinzel,serif;font-size:1.5rem;color:#f0e6d3;text-align:center;max-width:500px;">' +
-      '"The Winchesters. To bravery, to family, to the end."</p>' +
-      '<p style="margin-top:2rem;color:#888;font-size:0.8rem;">Click anywhere to close</p>';
+    seasonSelect.value = randSeason;
+    seasonSelect.dispatchEvent(new Event('change'));
 
-    overlay.addEventListener('click', function () {
-      overlay.remove();
+    episodeSelect.value = randEp.ep;
+    episodeSelect.dispatchEvent(new Event('change'));
+  });
+
+  function findEpisode(season, ep) {
+    var eps = EPISODES[season];
+    if (!eps) return null;
+    for (var i = 0; i < eps.length; i++) {
+      if (eps[i].ep === ep) return eps[i];
+    }
+    return null;
+  }
+
+  function showResult(season, ep, data) {
+    resultBadge.textContent = 'S' + pad(season) + 'E' + pad(ep);
+    resultTitle.textContent = data.title;
+
+    var metaParts = [];
+    if (data.aired) metaParts.push('Aired: ' + data.aired);
+    if (data.director) metaParts.push('Directed by ' + data.director);
+    resultMeta.textContent = metaParts.join(' \u00B7 ');
+
+    resultFacts.innerHTML = '';
+    data.facts.forEach(function (fact) {
+      var li = document.createElement('li');
+      li.textContent = fact;
+      resultFacts.appendChild(li);
     });
 
-    document.body.appendChild(overlay);
+    resultsDiv.classList.remove('hidden');
+    placeholder.classList.add('hidden');
+
+    // Re-trigger animation
+    resultsDiv.style.animation = 'none';
+    resultsDiv.offsetHeight; // force reflow
+    resultsDiv.style.animation = '';
+  }
+
+  function showNoData(season, ep) {
+    resultBadge.textContent = 'S' + pad(season) + 'E' + pad(ep);
+    resultTitle.textContent = 'Episode ' + ep;
+    resultMeta.textContent = 'Season ' + season;
+
+    resultFacts.innerHTML = '';
+    var li = document.createElement('li');
+    li.textContent = 'Fun facts for this episode are not yet in our database. Try another episode or hit Random!';
+    resultFacts.appendChild(li);
+
+    resultsDiv.classList.remove('hidden');
+    placeholder.classList.add('hidden');
+
+    resultsDiv.style.animation = 'none';
+    resultsDiv.offsetHeight;
+    resultsDiv.style.animation = '';
+  }
+
+  function showPlaceholder() {
+    resultsDiv.classList.add('hidden');
+    placeholder.classList.remove('hidden');
+  }
+
+  function pad(n) {
+    return n < 10 ? '0' + n : '' + n;
   }
 })();
